@@ -114,11 +114,11 @@ describe('chalkbars handlebars helpers', function(){
     describe("should support common shortcuts", function(){
       var shortcuts = {'BI': 'info', 'BW': 'warn', 'BO': 'success', 'BF': 'fail', 'BE': 'error', 'BP': 'pass', 'BS': 'skip', 'BD': 'debug'};
 
-      for(var shortcut in shortcuts){
+      Object.keys(shortcuts).forEach(function(shortcut){
         it(shortcut, function(){
           expect(chalkbars.$('{{' + shortcut + '}}')).to.equal(chalkbars.$('{{B ' + shortcuts[shortcut] + '}}'));
         });
-      }
+      });
     });
   });
 
@@ -136,11 +136,11 @@ describe('chalkbars handlebars helpers', function(){
     describe("should support common shortcuts", function(){
       var shortcuts = {'EI': 'info', 'EW': 'warn', 'EO': 'ok', 'EF': 'fail', 'EE': 'error', 'EP': 'pass', 'ES': 'skip', 'ED': 'debug'};
 
-      for(var shortcut in shortcuts){
+      Object.keys(shortcuts).forEach(function(shortcut){
         it(shortcut, function(){
           expect(chalkbars.$('{{' + shortcut + '}}')).to.equal(chalkbars.$('{{E ' + shortcuts[shortcut] + '}}'));
         });
-      }
+      });
     });
   });
 

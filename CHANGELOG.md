@@ -1,3 +1,8 @@
+### 2015-02-22 / 0.2.2
+
+* Bugfix.
+* Added Travis configuration.
+
 ### 2015-02-22 / 0.2.1
 
 * Bugfix.
