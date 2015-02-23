@@ -14,42 +14,42 @@ describe('chalkbars.$', function(){
     });
 
     it('should style using arguments and invoking chalk', function(){
-      expect(chalkbars.$('{{#cb "red"}}MESSAGE{{/cb}}')).to.equal('\x1b[31mMESSAGE\x1b[39m');
-      expect(chalkbars.$('{{#cb "red" "yellow"}}MESSAGE{{/cb}}')).to.equal('\x1b[33m\x1b[31mMESSAGE\x1b[33m\x1b[39m');
-      expect(chalkbars.$('{{#cb "red" yellow}}MESSAGE{{/cb}}')).to.equal('\x1b[31mMESSAGE\x1b[39m');
-      expect(chalkbars.$('{{#cb "red"}}MESSAGE{{#cb "yellow"}}INNER{{/cb}}RESTORE{{/cb}}')).to.equal('\x1b[31mMESSAGE\x1b[33mINNER\x1b[31mRESTORE\x1b[39m')
+      expect(chalkbars.$('{{#C "red"}}MESSAGE{{/C}}')).to.equal('\x1b[31mMESSAGE\x1b[39m');
+      expect(chalkbars.$('{{#C "red" "yellow"}}MESSAGE{{/C}}')).to.equal('\x1b[33m\x1b[31mMESSAGE\x1b[33m\x1b[39m');
+      expect(chalkbars.$('{{#C "red" yellow}}MESSAGE{{/C}}')).to.equal('\x1b[31mMESSAGE\x1b[39m');
+      expect(chalkbars.$('{{#C "red"}}MESSAGE{{#C "yellow"}}INNER{{/C}}RESTORE{{/C}}')).to.equal('\x1b[31mMESSAGE\x1b[33mINNER\x1b[31mRESTORE\x1b[39m')
     });
 
     it('should concatenate arguments, using the last as context', function(){
-      expect(chalkbars.$('{{#cb bgGreen.underline}}MESSAGE{{/cb}}', null, '{{#cb blue}}OTHER{{/cb}}')).to.equal('\x1b[4m\x1b[42mMESSAGE\x1b[49m\x1b[24mnull\x1b[34mOTHER\x1b[39m');
+      expect(chalkbars.$('{{#C bgGreen.underline}}MESSAGE{{/C}}', null, '{{#C blue}}OTHER{{/C}}')).to.equal('\x1b[4m\x1b[42mMESSAGE\x1b[49m\x1b[24mnull\x1b[34mOTHER\x1b[39m');
     });
 
     it('should concatenate arguments, using the last as context', function(){
-      expect(chalkbars.$('{{#cb red}}{{field}}{{/cb}}', '{{#cb green}}{{otherField}}{{/cb}}', {field: 'FIELD', otherField: 'OTHER'})).to.equal('\x1b[31mFIELD\x1b[39m\x1b[32mOTHER\x1b[39m');
+      expect(chalkbars.$('{{#C red}}{{field}}{{/C}}', '{{#C green}}{{otherField}}{{/C}}', {field: 'FIELD', otherField: 'OTHER'})).to.equal('\x1b[31mFIELD\x1b[39m\x1b[32mOTHER\x1b[39m');
     });
   });
 
   describe('error handling', function(){
     it('should return the source string unparsed when silent mode is enabled', function(){
       chalkbars.configuration.silent = true;
-      expect(chalkbars.$('{{#cb custom}}MESSAGE')).to.equal('{{#cb custom}}MESSAGE');
+      expect(chalkbars.$('{{#C custom}}MESSAGE')).to.equal('{{#C custom}}MESSAGE');
     });
 
     it('should throw the exception when silent mode is disabled', function(){
       chalkbars.configuration.silent = false;
-      expect(chalkbars.$).withArgs('{{#cb custom}}MESSAGE').to.throwException();
+      expect(chalkbars.$).withArgs('{{#C custom}}MESSAGE').to.throwException();
       chalkbars.configuration.silent = true;
     });
   });
 
   describe('color handling', function(){
     it('should handle 8-bit color codes', function(){
-      expect(chalkbars.$('{{#cb i#196 I#046}}MESSAGE{{/cb}}')).to.equal('\x1b[48;5;046m\x1b[38;5;196mMESSAGE\x1b[39m\x1b[49m');
-      expect(chalkbars.$('{{#cb x#500 X#050}}MESSAGE{{/cb}}')).to.equal('\x1b[48;5;46m\x1b[38;5;196mMESSAGE\x1b[39m\x1b[49m');
+      expect(chalkbars.$('{{#C i#196 I#046}}MESSAGE{{/C}}')).to.equal('\x1b[48;5;046m\x1b[38;5;196mMESSAGE\x1b[39m\x1b[49m');
+      expect(chalkbars.$('{{#C x#500 X#050}}MESSAGE{{/C}}')).to.equal('\x1b[48;5;46m\x1b[38;5;196mMESSAGE\x1b[39m\x1b[49m');
     });
 
     it('should handle 24-bit color codes', function(){
-      expect(chalkbars.$('{{#cb h#FF0000 H#00FF00}}MESSAGE{{/cb}}')).to.equal('\x1b[48;2;0;255;0m\x1b[38;2;255;0;0mMESSAGE\x1b[39m\x1b[49m');
+      expect(chalkbars.$('{{#C h#FF0000 H#00FF00}}MESSAGE{{/C}}')).to.equal('\x1b[48;2;0;255;0m\x1b[38;2;255;0;0mMESSAGE\x1b[39m\x1b[49m');
 
     });
   });
@@ -84,56 +84,77 @@ describe('chalkbars.style', function(){
   });
 
   it('should resolve styles in templates', function(){
-    expect(chalkbars.$('{{#cb "bracket-2"}}MESSAGE{{/cb}}')).to.equal('MESSAGE');
-    expect(chalkbars.$('{{#cb "bracket"}}MESSAGE{{/cb}}')).to.equal('\x1b[1m\x1b[38;5;25mMESSAGE\x1b[39m\x1b[22m');
+    expect(chalkbars.$('{{#C "bracket-2"}}MESSAGE{{/C}}')).to.equal('MESSAGE');
+    expect(chalkbars.$('{{#C "bracket"}}MESSAGE{{/C}}')).to.equal('\x1b[1m\x1b[38;5;25mMESSAGE\x1b[39m\x1b[22m');
   });
 
   it("should have a list of default styles", function(){
-    expect(chalkbars.$('{{#cb "bracket"}}MESSAGE{{/cb}}')).to.equal('\x1b[1m\x1b[38;5;25mMESSAGE\x1b[39m\x1b[22m');
-    expect(chalkbars.$('{{#cb "info"}}MESSAGE{{/cb}}')).to.equal('\x1b[37m\x1b[1mMESSAGE\x1b[22m\x1b[39m');
-    expect(chalkbars.$('{{#cb "highlight"}}MESSAGE{{/cb}}')).to.equal('\x1b[37m\x1b[1mMESSAGE\x1b[22m\x1b[39m');
-    expect(chalkbars.$('{{#cb "skip"}}MESSAGE{{/cb}}')).to.equal('\x1b[90m\x1b[1mMESSAGE\x1b[22m\x1b[39m');
-    expect(chalkbars.$('{{#cb "ok"}}MESSAGE{{/cb}}')).to.equal('\x1b[32m\x1b[1mMESSAGE\x1b[22m\x1b[39m');
-    expect(chalkbars.$('{{#cb "success"}}MESSAGE{{/cb}}')).to.equal('\x1b[32m\x1b[1mMESSAGE\x1b[22m\x1b[39m');
-    expect(chalkbars.$('{{#cb "warn"}}MESSAGE{{/cb}}')).to.equal('\x1b[33m\x1b[1mMESSAGE\x1b[22m\x1b[39m');
-    expect(chalkbars.$('{{#cb "fail"}}MESSAGE{{/cb}}')).to.equal('\x1b[31m\x1b[1mMESSAGE\x1b[22m\x1b[39m');
-    expect(chalkbars.$('{{#cb "error"}}MESSAGE{{/cb}}')).to.equal('\x1b[31m\x1b[1mMESSAGE\x1b[22m\x1b[39m');
-    expect(chalkbars.$('{{#cb "pass"}}MESSAGE{{/cb}}')).to.equal('\x1b[35m\x1b[1mMESSAGE\x1b[22m\x1b[39m');
-    expect(chalkbars.$('{{#cb "debug"}}MESSAGE{{/cb}}')).to.equal('\x1b[1m\x1b[38;5;45mMESSAGE\x1b[39m\x1b[22m');
+    expect(chalkbars.$('{{#C "bracket"}}MESSAGE{{/C}}')).to.equal('\x1b[1m\x1b[38;5;25mMESSAGE\x1b[39m\x1b[22m');
+    expect(chalkbars.$('{{#C "info"}}MESSAGE{{/C}}')).to.equal('\x1b[37m\x1b[1mMESSAGE\x1b[22m\x1b[39m');
+    expect(chalkbars.$('{{#C "highlight"}}MESSAGE{{/C}}')).to.equal('\x1b[37m\x1b[1mMESSAGE\x1b[22m\x1b[39m');
+    expect(chalkbars.$('{{#C "skip"}}MESSAGE{{/C}}')).to.equal('\x1b[90m\x1b[1mMESSAGE\x1b[22m\x1b[39m');
+    expect(chalkbars.$('{{#C "ok"}}MESSAGE{{/C}}')).to.equal('\x1b[32m\x1b[1mMESSAGE\x1b[22m\x1b[39m');
+    expect(chalkbars.$('{{#C "success"}}MESSAGE{{/C}}')).to.equal('\x1b[32m\x1b[1mMESSAGE\x1b[22m\x1b[39m');
+    expect(chalkbars.$('{{#C "warn"}}MESSAGE{{/C}}')).to.equal('\x1b[33m\x1b[1mMESSAGE\x1b[22m\x1b[39m');
+    expect(chalkbars.$('{{#C "fail"}}MESSAGE{{/C}}')).to.equal('\x1b[31m\x1b[1mMESSAGE\x1b[22m\x1b[39m');
+    expect(chalkbars.$('{{#C "error"}}MESSAGE{{/C}}')).to.equal('\x1b[31m\x1b[1mMESSAGE\x1b[22m\x1b[39m');
+    expect(chalkbars.$('{{#C "pass"}}MESSAGE{{/C}}')).to.equal('\x1b[35m\x1b[1mMESSAGE\x1b[22m\x1b[39m');
+    expect(chalkbars.$('{{#C "debug"}}MESSAGE{{/C}}')).to.equal('\x1b[1m\x1b[38;5;45mMESSAGE\x1b[39m\x1b[22m');
   });
 });
 
 describe('chalkbars handlebars helpers', function(){
-  describe('cbh', function(){
+  describe('B', function(){
     it("should display a banner", function(){
-      expect(chalkbars.$('{{cbh info}}')).to.equal('\x1b[1m\x1b[38;5;25m[\x1b[39m\x1b[22m\x1b[1mINFO\x1b[22m\x1b[1m\x1b[38;5;25m]\x1b[39m\x1b[22m');
-      expect(chalkbars.$('{{cbh info red}}')).to.equal('\x1b[1m\x1b[38;5;25m[\x1b[39m\x1b[22m\x1b[1mINFO RED\x1b[22m\x1b[1m\x1b[38;5;25m]\x1b[39m\x1b[22m');
-      expect(chalkbars.$('{{cbh "info" "red"}}')).to.equal('\x1b[1m\x1b[38;5;25m[\x1b[39m\x1b[22m\x1b[1m\x1b[31mINFO\x1b[39m\x1b[22m\x1b[1m\x1b[38;5;25m]\x1b[39m\x1b[22m');
+      expect(chalkbars.$('{{B info}}')).to.equal('\x1b[1m\x1b[38;5;25m[\x1b[39m\x1b[22m\x1b[1m\x1b[37m\x1b[1m INFO\x1b[1m\x1b[39m\x1b[22m\x1b[1m\x1b[38;5;25m]\x1b[39m\x1b[22m');
+      expect(chalkbars.$('{{B info red}}')).to.equal('\u001b[1m\u001b[38;5;25m[\u001b[39m\u001b[22m\u001b[1m\u001b[31m\u001b[37m\u001b[1mINFO RED\u001b[1m\u001b[31m\u001b[39m\u001b[22m\u001b[1m\u001b[38;5;25m]\u001b[39m\u001b[22m');
+      expect(chalkbars.$('{{B "info" "red"}}')).to.equal('\x1b[1m\x1b[38;5;25m[\x1b[39m\x1b[22m\x1b[1m\x1b[31m INFO\x1b[39m\x1b[22m\x1b[1m\x1b[38;5;25m]\x1b[39m\x1b[22m');
+    });
+
+    describe("should support common shortcuts", function(){
+      var shortcuts = {'BI': 'info', 'BW': 'warn', 'BO': 'success', 'BF': 'fail', 'BE': 'error', 'BP': 'pass', 'BS': 'skip', 'BD': 'debug'};
+
+      for(var shortcut in shortcuts){
+        it(shortcut, function(){
+          expect(chalkbars.$('{{' + shortcut + '}}')).to.equal(chalkbars.$('{{B ' + shortcuts[shortcut] + '}}'));
+        });
+      }
     });
   });
 
-  describe('cbf', function(){
+  describe('E', function(){
     it("should display a footer", function(){
-      expect(chalkbars.$('{{cbf ok}}')).to.equal('\n\x1b[1A\x1b[230C\x1b[1m\x1b[38;5;25m[\x1b[39m\x1b[22m\x1b[1m\x1b[32m\x1b[1m OK \x1b[1m\x1b[39m\x1b[22m\x1b[1m\x1b[38;5;25m]\x1b[39m\x1b[22m');
-      expect(chalkbars.$('{{cbf o}}')).to.equal('\n\x1b[1A\x1b[230C\x1b[1m\x1b[38;5;25m[\x1b[39m\x1b[22m\x1b[1m O  \x1b[22m\x1b[1m\x1b[38;5;25m]\x1b[39m\x1b[22m');
-      expect(chalkbars.$('{{cbf ooo}}')).to.equal('\n\x1b[1A\x1b[230C\x1b[1m\x1b[38;5;25m[\x1b[39m\x1b[22m\x1b[1m OOO\x1b[22m\x1b[1m\x1b[38;5;25m]\x1b[39m\x1b[22m');
-      expect(chalkbars.$('{{cbf ok red}}')).to.equal('\n\x1b[1A\x1b[228C\x1b[1m\x1b[38;5;25m[\x1b[39m\x1b[22m\x1b[1m\x1b[31m\x1b[32m\x1b[1mOK RED\x1b[1m\x1b[31m\x1b[39m\x1b[22m\x1b[1m\x1b[38;5;25m]\x1b[39m\x1b[22m');
-      expect(chalkbars.$('{{cbf "ok" "red"}}')).to.equal('\n\x1b[1A\x1b[230C\x1b[1m\x1b[38;5;25m[\x1b[39m\x1b[22m\x1b[1m\x1b[31m OK \x1b[39m\x1b[22m\x1b[1m\x1b[38;5;25m]\x1b[39m\x1b[22m');
-      expect(chalkbars.$('This is a another message {{cbf ok}}')).to.equal('This is a another message \n\x1b[1A\x1b[230C\x1b[1m\x1b[38;5;25m[\x1b[39m\x1b[22m\x1b[1m\x1b[32m\x1b[1m OK \x1b[1m\x1b[39m\x1b[22m\x1b[1m\x1b[38;5;25m]\x1b[39m\x1b[22m');
-      expect(chalkbars.$('This is a another message {{cbf "warn" "green"}}')).to.equal('This is a another message \n\x1b[1A\x1b[230C\x1b[1m\x1b[38;5;25m[\x1b[39m\x1b[22m\x1b[1m\x1b[32mWARN\x1b[39m\x1b[22m\x1b[1m\x1b[38;5;25m]\x1b[39m\x1b[22m');
+      expect(chalkbars.$('{{E ok}}')).to.equal('\n\x1b[1A\x1b[230C\x1b[1m\x1b[38;5;25m[\x1b[39m\x1b[22m\x1b[1m\x1b[32m\x1b[1m OK \x1b[1m\x1b[39m\x1b[22m\x1b[1m\x1b[38;5;25m]\x1b[39m\x1b[22m');
+      expect(chalkbars.$('{{E o}}')).to.equal('\n\x1b[1A\x1b[230C\x1b[1m\x1b[38;5;25m[\x1b[39m\x1b[22m\x1b[1m O  \x1b[22m\x1b[1m\x1b[38;5;25m]\x1b[39m\x1b[22m');
+      expect(chalkbars.$('{{E ooo}}')).to.equal('\n\x1b[1A\x1b[230C\x1b[1m\x1b[38;5;25m[\x1b[39m\x1b[22m\x1b[1m OOO\x1b[22m\x1b[1m\x1b[38;5;25m]\x1b[39m\x1b[22m');
+      expect(chalkbars.$('{{E ok red}}')).to.equal('\n\x1b[1A\x1b[228C\x1b[1m\x1b[38;5;25m[\x1b[39m\x1b[22m\x1b[1m\x1b[31m\x1b[32m\x1b[1mOK RED\x1b[1m\x1b[31m\x1b[39m\x1b[22m\x1b[1m\x1b[38;5;25m]\x1b[39m\x1b[22m');
+      expect(chalkbars.$('{{E "ok" "red"}}')).to.equal('\n\x1b[1A\x1b[230C\x1b[1m\x1b[38;5;25m[\x1b[39m\x1b[22m\x1b[1m\x1b[31m OK \x1b[39m\x1b[22m\x1b[1m\x1b[38;5;25m]\x1b[39m\x1b[22m');
+      expect(chalkbars.$('This is a another message {{E ok}}')).to.equal('This is a another message \n\x1b[1A\x1b[230C\x1b[1m\x1b[38;5;25m[\x1b[39m\x1b[22m\x1b[1m\x1b[32m\x1b[1m OK \x1b[1m\x1b[39m\x1b[22m\x1b[1m\x1b[38;5;25m]\x1b[39m\x1b[22m');
+      expect(chalkbars.$('This is a another message {{E "warn" "green"}}')).to.equal('This is a another message \n\x1b[1A\x1b[230C\x1b[1m\x1b[38;5;25m[\x1b[39m\x1b[22m\x1b[1m\x1b[32mWARN\x1b[39m\x1b[22m\x1b[1m\x1b[38;5;25m]\x1b[39m\x1b[22m');
+    });
+
+    describe("should support common shortcuts", function(){
+      var shortcuts = {'EI': 'info', 'EW': 'warn', 'EO': 'ok', 'EF': 'fail', 'EE': 'error', 'EP': 'pass', 'ES': 'skip', 'ED': 'debug'};
+
+      for(var shortcut in shortcuts){
+        it(shortcut, function(){
+          expect(chalkbars.$('{{' + shortcut + '}}')).to.equal(chalkbars.$('{{E ' + shortcuts[shortcut] + '}}'));
+        });
+      }
     });
   });
 
-  describe('cbh and cbf should use set brackets', function(){
+  it('B and E should use set brackets', function(){
     var oldOpening = chalkbars.configuration.openingBracket;
     var oldClosing = chalkbars.configuration.closingBracket;
 
     chalkbars.configuration.openingBracket = "(";
     chalkbars.configuration.closingBracket = ")";
 
-    expect(chalkbars.$('{{cbh info}} Message {{cbf ok}}')).to.equal('(\x1b[1mINFO\x1b[22m) Message \n\x1b[1A\x1b[230C(\x1b[1m\x1b[32m\x1b[1m OK \x1b[1m\x1b[39m\x1b[22m)');
+    expect(chalkbars.$('{{B info}} Message {{E ok}}')).to.equal('(\u001b[1m\u001b[37m\u001b[1m INFO\u001b[1m\u001b[39m\u001b[22m) Message \n\u001b[1A\u001b[230C(\u001b[1m\u001b[32m\u001b[1m OK \u001b[1m\u001b[39m\u001b[22m)');
 
     chalkbars.configuration.openingBracket = oldOpening;
     chalkbars.configuration.closingBracket = oldClosing;
   });
+
 });
