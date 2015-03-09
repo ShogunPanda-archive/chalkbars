@@ -3,38 +3,51 @@
 // Licensed under the MIT license, which can be found at http://www.opensource.org/licenses/mit-license.php.
 //
 
-var renderTemplate = require("./lib/templating");
+(function(){
+  "use strict";
 
-var chalkbars = function(){
-  if(!arguments.length){
-    return "";
-  }
+  var chalk = require("chalk");
+  var renderTemplate = require("./lib/templating");
 
-  var args = Array.prototype.slice.call(arguments, 0);
+  var format = function(){
+    if(!arguments.length)
+      return "";
 
-  // Get the last element and check whether is a object.
-  var context = args.pop();
+    var args = Array.prototype.slice.call(arguments, 0);
 
-  if(!context || typeof context !== 'object'){
-    args.push(context);
-    context = {};
-  }
+    // Get the last element and check whether is a object.
+    var context = args.pop();
 
-  // Perform the handlebars compilation
-  try{
-    return renderTemplate(args, context);
-  }catch(e){
-    // If it fails we return the raw source or raise an error
-    if(module.exports.configuration.silent){
-      return args.join("");
-    }else{
+    if(!context || typeof context !== "object"){
+      args.push(context);
+      context = {};
+    }
+
+    // Perform the handlebars compilation
+    try{
+      return renderTemplate(args, context);
+    }catch(e){
+      // If it fails we return the raw source or raise an error
+      if(module.exports.configuration.silent)
+        return args.join("");
+
       throw e;
     }
-  }
-};
+  };
 
-module.exports = {
-  configuration: require("./lib/configuration"),
-  $: chalkbars,
-  style: require("./lib/functions").manageStyle
-};
+  module.exports = {
+    configuration: require("./lib/configuration"),
+
+    style: require("./lib/functions").manageStyle,
+
+    format: format,
+
+    plainFormat: function(){
+      return chalk.stripColor(format.apply(this, arguments));
+    },
+
+    log: function(){
+      return console.log(format.apply(this, arguments));
+    }
+  };
+})();

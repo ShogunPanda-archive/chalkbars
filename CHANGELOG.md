@@ -1,3 +1,11 @@
+### YYYY-MM-DD / 0.3.0
+
+* Renamed `$` to `format`.
+* Added `chalkbars.plain_format`, which compiles template removing all chalk styles.
+* Added `chalkbars.log`, which is a shorthand for `console.log(chalkbars.format(...))`.
+* Improved tests.
+* Added ESLint for QA.
+
 ### 2015-02-22 / 0.2.2
 
 * Bugfix.
