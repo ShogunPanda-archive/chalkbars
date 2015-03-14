@@ -79,7 +79,7 @@ The following shortcut helpers are also defined:
 
 * **BI**: Shortand for `{{B "info"}}`
 * **BW**: Shortand for `{{B "warn"}}`
-* **BO**: Shortand for `{{B "success"}}`
+* **BO**: Shortand for `{{B "ok"}}`
 * **BF**: Shortand for `{{B "fail"}}`
 * **BE**: Shortand for `{{B "error"}}`
 * **BP**: Shortand for `{{B "pass"}}`
@@ -90,7 +90,7 @@ The following shortcut helpers are also defined:
 
 Outputs a footer with a word between brackets
 
-It behaves like [B](#B) but it makes sure the message is print to the right of the screen.
+It behaves like [B](#B) but it makes sure the message is printed to the right of the screen.
 
 ```javascript
 console.log(chalkbars("On the right you see a white 'INFO' word inside blue brackets {{E info}}"));
@@ -105,7 +105,7 @@ The following shortcut helpers are also defined:
 
 * **EI**: Shortand for `{{E "info"}}`
 * **EW**: Shortand for `{{E "warn"}}`
-* **EO**: Shortand for `{{E "success"}}`
+* **EO**: Shortand for `{{E "ok"}}`
 * **EF**: Shortand for `{{E "fail"}}`
 * **EE**: Shortand for `{{E "error"}}`
 * **EP**: Shortand for `{{E "pass"}}`
@@ -155,8 +155,6 @@ Example:
 ```javascript
 console.log(chalkbars.format("{{#C red}}This is in red{{/C}} and this is not."));
 ```
-
-# TODO
 
 ### chalkbars.style(name, value)
 

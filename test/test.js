@@ -176,7 +176,7 @@
       });
 
       describe("should support common shortcuts", function(){
-        var shortcuts = {"BI": "info", "BW": "warn", "BO": "success", "BF": "fail", "BE": "error", "BP": "pass", "BS": "skip", "BD": "debug"};
+        var shortcuts = {"BI": "info", "BW": "warn", "BO": "ok", "BF": "fail", "BE": "error", "BP": "pass", "BS": "skip", "BD": "debug"};
 
         Object.keys(shortcuts).forEach(function(shortcut){
           it(shortcut, function(){

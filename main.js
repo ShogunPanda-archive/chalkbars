@@ -4,6 +4,8 @@
  */
 
 (function(){
+  "use strict";
+
   var chalk = require("chalk");
   var renderTemplate = require("./lib/templating");
 
@@ -39,7 +41,7 @@
 
       throw e;
     }
-  }
+  };
 
   /**
    * Chalkbars module.
