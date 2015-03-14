@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>chalkbars</h1><p><a href="http://badge.fury.io/js/chalkbars"><img src="https://badge.fury.io/js/chalkbars.png" alt="Gem Version"></a>
+<a href="https://gemnasium.com/ShogunPanda/chalkbars"><img src="https://gemnasium.com/ShogunPanda/chalkbars.png?travis" alt="Dependency Status"></a>
+<a href="http://travis-ci.org/ShogunPanda/chalkbars"><img src="https://secure.travis-ci.org/ShogunPanda/chalkbars.png?branch=master" alt="Build Status"></a>
+<a href="https://codeclimate.com/github/ShogunPanda/chalkbars"><img src="https://codeclimate.com/github/ShogunPanda/chalkbars.png" alt="Code Climate"></a>
+<a href="https://coveralls.io/r/ShogunPanda/chalkbars"><img src="https://coveralls.io/repos/ShogunPanda/chalkbars/badge.png" alt="Coverage Status"></a></p>
+<p>Template based terminal coloring based on <a href="https://www.npmjs.com/package/chalk">Chalk</a> and <a href="http://handlebarsjs.com">Handlebars</a>.</p>
+<p>http://sw.cowtech.it/chalkbars</p>
+<h2>Usage</h2><p>Chalkbars allows an easier use of chalk on the console taking advantage of the awesome Handlebars templating engine.</p>
+<p>The use is really easy:</p>
+<pre class="prettyprint source lang-javascript"><code>var chalkbars = require(&quot;chalkbars&quot;).format;
+console.log(chalkbars(&quot;{{#C red}}This is in red{{/C}} and this is not.&quot;));</code></pre><h2>Supported implementations.</h2><p>Chalkbars supports and has been tested on <a href="http://nodejs.org">NodeJS</a> 0.10+ and <a href="http://iojs.org">io.js</a> 1.0+. </p>
+<h2>Chalkbars Handlebars helpers</h2><h3>C</h3><p>This is the main template. It accepts one or more styles, concatenated by any character except letters, numbers and &quot;#&quot;. </p>
+<p>Even thought quotes are optional, is advised to always provide them for clarity.</p>
+<p>This template will replace text inside with the styles provided. </p>
+<p>It supports nesting.</p>
+<p>Examples:</p>
+<pre class="prettyprint source lang-javascript"><code>console.log(chalkbars(&quot;{{#C red}}This is in red except for {{#C green}}this{{/C}} and it supports restoring.{{/C}}&quot;));
+console.log(chalkbars(&quot;{{#C red.bgYellow}}This is in red with a yellow background.{{/C}}&quot;));
+console.log(chalkbars(&quot;{{#C red$bgYellow}}Same as above.{{/C}}&quot;));</code></pre><p>Supported styles are:</p>
+<ul>
+<li>Default Chalk styles.</li>
+<li><em>i#</em><strong>ABC</strong> (where ABC is a 3 digit number): The ANSI color code. Example: <strong>031</strong> is red foreground, <strong>042</strong> is green background.</li>
+<li><em>x#</em><strong>ABC</strong> (where A, B, C are a number from 0 to 5): The 256 ANSI color code. For the meaning of the values, see <a href="https://github.com/jbnicolai/ansi-256-colors">https://github.com/jbnicolai/ansi-256-colors</a></li>
+<li><em>X#</em><strong>AABBCC</strong> (where AA, BB, CC ranges from 00 to FF): The RGB HEX color code.</li>
+<li>User defined styles (see <code>chalkbars.style</code> below).</li>
+</ul>
+<p>All unrecognized styles are ignored.</p>
+<h3>B</h3><p>Outputs a header with a word between brackets. </p>
+<p>It does not support nesting and does not support any embedded content.</p>
+<p>It accepts one or two arguments. The first argument is the word to print, the second argument is the style. If the latter is omitted, the first word is also used as a style.
+Again, quoting is optional but advised.</p>
+<p>Examples: </p>
+<pre class="prettyprint source lang-javascript"><code>console.log(chalkbars(&quot;{{B info}} On the left you see a white 'INFO' word inside blue brackets&quot;));
+console.log(chalkbars(&quot;{{B \&quot;info\&quot; \&quot;red\&quot;}} On the left you see a red 'INFO' word inside blue brackets&quot;));
+console.log(chalkbars(&quot;{{B info red}} Omitting quotes might lead to unwanted behavior&quot;));
+console.log(chalkbars(&quot;{{B \&quot;what\&quot; \&quot;red.bgYellow\&quot;}} On the left you see a red on yellow background 'WHAT' word inside blue brackets&quot;));</code></pre><h4>Shortcuts</h4><p>The following shortcut helpers are also defined:</p>
+<ul>
+<li><strong>BI</strong>: Shortand for <code>{{B &quot;info&quot;}}</code></li>
+<li><strong>BW</strong>: Shortand for <code>{{B &quot;warn&quot;}}</code></li>
+<li><strong>BO</strong>: Shortand for <code>{{B &quot;ok&quot;}}</code></li>
+<li><strong>BF</strong>: Shortand for <code>{{B &quot;fail&quot;}}</code></li>
+<li><strong>BE</strong>: Shortand for <code>{{B &quot;error&quot;}}</code></li>
+<li><strong>BP</strong>: Shortand for <code>{{B &quot;pass&quot;}}</code></li>
+<li><strong>BS</strong>: Shortand for <code>{{B &quot;skip&quot;}}</code></li>
+<li><strong>BD</strong>: Shortand for <code>{{B &quot;debug&quot;}}</code></li>
+</ul>
+<h3>E</h3><p>Outputs a footer with a word between brackets</p>
+<p>It behaves like <a href="#B">B</a> but it makes sure the message is print to the right of the screen.</p>
+<pre class="prettyprint source lang-javascript"><code>console.log(chalkbars(&quot;On the right you see a white 'INFO' word inside blue brackets {{E info}}&quot;));
+console.log(chalkbars(&quot;On the right you see a red 'INFO' word inside blue brackets {{E \&quot;info\&quot; \&quot;red\&quot;}}&quot;));
+console.log(chalkbars(&quot;Omitting quotes might lead to unwanted behavior {{E info red}}&quot;));
+console.log(chalkbars(&quot;On the right you see a red on yellow background 'WHAT' word inside blue brackets {{B \&quot;what\&quot; \&quot;red.bgYellow\&quot;}}&quot;));</code></pre><h4>Shortcuts</h4><p>The following shortcut helpers are also defined:</p>
+<ul>
+<li><strong>EI</strong>: Shortand for <code>{{E &quot;info&quot;}}</code></li>
+<li><strong>EW</strong>: Shortand for <code>{{E &quot;warn&quot;}}</code></li>
+<li><strong>EO</strong>: Shortand for <code>{{E &quot;ok&quot;}}</code></li>
+<li><strong>EF</strong>: Shortand for <code>{{E &quot;fail&quot;}}</code></li>
+<li><strong>EE</strong>: Shortand for <code>{{E &quot;error&quot;}}</code></li>
+<li><strong>EP</strong>: Shortand for <code>{{E &quot;pass&quot;}}</code></li>
+<li><strong>ES</strong>: Shortand for <code>{{E &quot;skip&quot;}}</code></li>
+<li><strong>ED</strong>: Shortand for <code>{{E &quot;debug&quot;}}</code></li>
+</ul>
+<h2>Configuring Chalkbars</h2><h3>chalkbars.configuration.silent</h3><p>Whether to ignore exceptions when compiling a Handlebars template fails. </p>
+<p>If set to <code>false</code> a compilation failure will raise an exception.</p>
+<p>The default value is <code>true</code>.</p>
+<h3>chalkbars.configuration.openingBracket</h3><p>The default template for the opening bracket in the <a href="#B">B</a> and <a href="#E">E</a> templates.</p>
+<p>The default value is <code>{{#C bracket}}[{{/C}}</code>.</p>
+<h3>chalkbars.configuration.closingBracket</h3><p>The default template for the closing bracket in the <a href="#B">B</a> and <a href="#E">E</a> templates.</p>
+<p>The default value is <code>{{#C bracket}}]{{/C}}</code>.</p>
+<h3>chalkbars.configuration.styles</h3><p>The list of valid chalk styles for the <a href="#C">C</a>, <a href="#B">B</a> and <a href="#E">E</a> templates.  </p>
+<p><strong>Do not modify this directly but use <a href="#chalkbars.style">chalkbars.style</a> instead.</strong></p>
+<h2>API Documentation</h2><h3>chalkbars.format(...template, context)</h3><p>It compiles the template (you can pass multiple templates, they will be concatenated) using Handlebars and applying chalk and custom styles.</p>
+<p>If the last argument is a object, it will be passed as the context to Handlebars.</p>
+<p>If might or not raise an exception depending on the value of <code>chalkbars.configuration.silent</code>.</p>
+<p>Example:</p>
+<pre class="prettyprint source lang-javascript"><code>console.log(chalkbars.format(&quot;{{#C red}}This is in red{{/C}} and this is not.&quot;));</code></pre><h1>TODO</h1><h3>chalkbars.style(name, value)</h3><p>Get or sets a chalkbars style. Returns <code>undefined</code> when a style is not defined. </p>
+<p>When <code>value</code> is omitted, it returns the current value of the style.</p>
+<p>When <code>value</code> is <code>null</code>, it returns the current value of the style and then deletes the style.</p>
+<p>When <code>value</code> is a string, it sets the new value of the style and then returns the value itself.</p>
+<p>Style nesting or overwriting a chalk style is not allowed.</p>
+<p>Examples: </p>
+<pre class="prettyprint source lang-javascript"><code>console.log(chalkbars.style(&quot;custom&quot;));
+// => undefined
+console.log(chalkbars.style(&quot;custom&quot;, &quot;red&quot;));
+// => &quot;red&quot;
+console.log(chalkbars.style(&quot;custom&quot;));
+// => &quot;red&quot;
+console.log(chalkbars.style(&quot;custom&quot;, &quot;green&quot;));
+// => &quot;green&quot;
+console.log(chalkbars.style(&quot;custom&quot;, null));
+// => &quot;green&quot;
+console.log(chalkbars.style(&quot;custom&quot;));
+// => undefined</code></pre><h3>chalkbars.log(...template, context)</h3><p>Simply a shortcut for <code>console.log(chalkbars.format(...));</code>.</p>
+<h3>chalkbars.formatNoColor(...template, context)</h3><p>It behaves like <a href="#chalkbars.format">chalkbars.format</a> but it removes all ANSI colors escapes code before returning.</p>
+<h3>chalkbars.plainFormat(...template, context)</h3><p>It behaves like <a href="#chalkbars.format">chalkbars.format</a> but it removes <strong>all</strong> ANSI escapes code before returning.</p>
+<h2>Contributing to chalkbars</h2><ul>
+<li>Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.</li>
+<li>Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.</li>
+<li>Fork the project.</li>
+<li>Start a feature/bugfix branch.</li>
+<li>Commit and push until you are happy with your contribution.</li>
+<li>Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.</li>
+</ul>
+<h2>Copyright</h2><p>Copyright (C) 2015 and above Shogun (shogun@cowtech.it).</p>
+<p>Licensed under the MIT license, which can be found at http://opensource.org/licenses/MIT.</p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="chalkbars.module_configuration.html">configuration</a></li><li><a href="module-chalkbars.html">chalkbars</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta2</a> on Sat Mar 14 2015 14:21:06 GMT-0700 (PDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -10,6 +10,7 @@
     "CHANGELOG.md"
   ],
   "scripts": {
+    "postpublish": "git tag -f v-$npm_package_version",
     "test": "./node_modules/.bin/mocha",
     "posttest": "./node_modules/.bin/eslint main.js lib/*.js",
     "coverage": "./node_modules/.bin/mocha --require blanket -R html-cov > coverage.html; true",
