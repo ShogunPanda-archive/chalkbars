@@ -42,6 +42,11 @@
 
     format: format,
 
+    formatNoColor: function(){
+      var message = format.apply(this, arguments);
+      return message.replace(/\u001b\[(?:[0-9]{1,3}(?:;[0-9]{1,3})*)?[m|K]/g, "");
+    },
+
     plainFormat: function(){
       return chalk.stripColor(format.apply(this, arguments));
     },

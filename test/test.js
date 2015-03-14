@@ -138,10 +138,17 @@
     });
   });
 
-  describe("chalkbars.plainFormat", function(){
+  describe("chalkbars.formatNoColor", function(){
     it("should apply format and remove colors", function(){
+      expect(chalkbars.formatNoColor("{{#C red}}{{field}}{{/C}}", {field: "FIELD"})).to.equal("FIELD");
+      expect(chalkbars.formatNoColor("{{B warn}} Message {{E skip}}")).to.equal("[ WARN] Message \n\x1b[1A\x1b[74C[SKIP]");
+    });
+  });
+
+  describe("chalkbars.plainFormat", function(){
+    it("should apply format and remove all ANSI escapes", function(){
       expect(chalkbars.plainFormat("{{#C red}}{{field}}{{/C}}", {field: "FIELD"})).to.equal("FIELD");
-      expect(chalkbars.plainFormat("{{B warn}} Message {{E skip}}")).to.equal("[ WARN] Message \n\x1b[1A\x1b[74C[SKIP]");
+      expect(chalkbars.plainFormat("{{B warn}} Message {{E skip}}")).to.equal("[ WARN] Message \n[SKIP]");
     });
   });
 
@@ -153,10 +160,7 @@
       chalkbars.log("{{B warn}} Message {{E skip}}");
 
       expect(stub.withArgs(chalk.red("FIELD")).calledOnce).to.be(true);
-      expect(stub.withArgs(
-        "\u001b[34m\u001b[1m[\u001b[22m\u001b[39m\u001b[33m\u001b[1m WARN\u001b[22m\u001b[39m\u001b[34m\u001b[1m]\u001b[22m\u001b[39m Message " +
-        "\n\u001b[1A\u001b[74C\u001b[34m\u001b[1m[\u001b[22m\u001b[39m\u001b[90m\u001b[1mSKIP\u001b[22m\u001b[39m\u001b[34m\u001b[1m]\u001b[22m\u001b[39m"
-      ).calledOnce).to.be(true);
+      expect(stub.withArgs(chalkbars.format("{{B warn}} Message {{E skip}}")).calledOnce).to.be(true);
 
       stub.restore();
     });

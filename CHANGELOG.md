@@ -1,7 +1,8 @@
-### YYYY-MM-DD / 0.3.0
+### 2015-03-14 / 0.3.0 - The PI release!
 
 * Renamed `$` to `format`.
-* Added `chalkbars.plain_format`, which compiles template removing all chalk styles.
+* Added `chalkbars.formatNoColor`, which compiles template removing all ANSI colors.
+* Added `chalkbars.plainFormat`, which compiles template removing all ANSI escapes.
 * Added `chalkbars.log`, which is a shorthand for `console.log(chalkbars.format(...))`.
 * Improved tests.
 * Added ESLint for QA.

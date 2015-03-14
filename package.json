@@ -10,9 +10,10 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "test": "mocha",
-    "coverage": "mocha --require blanket -R html-cov > coverage.html; true",
-    "posttest": "eslint main.js lib/*.js"
+    "test": "./node_modules/.bin/mocha",
+    "posttest": "./node_modules/.bin/eslint main.js lib/*.js",
+    "coverage": "./node_modules/.bin/mocha --require blanket -R html-cov > coverage.html; true",
+    "travis-ci": "./node_modules/.bin/mocha --require blanket -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js; true"
   },
   "repository": {
     "type": "git",
@@ -31,19 +32,24 @@
   },
   "homepage": "https://github.com/ShogunPanda/chalkbars",
   "dependencies": {
-    "chalk": "^0.5.1",
-    "handlebars": "^2.0.0"
+    "chalk": "^1.0.0",
+    "handlebars": "^3.0.0"
   },
   "devDependencies": {
     "blanket": "^1.1.6",
+    "coveralls": "^2.11.2",
     "eslint": "^0.16.1",
     "expect.js": "^0.3.1",
     "mocha": "~2.1.0",
+    "mocha-lcov-reporter": "0.0.2",
     "sinon": "^1.13.0"
   },
   "config": {
     "blanket": {
-      "pattern": ["main.js", "lib"],
+      "pattern": [
+        "main.js",
+        "lib"
+      ],
       "data-cover-never": "node_modules"
     }
   }
