@@ -49,7 +49,7 @@ Supported styles are:
 
 * Default Chalk styles.
 * _i#_**ABC** (where ABC is a 3 digit number): The ANSI color code. Example: **031** is red foreground, **042** is green background.
-* _x#_**ABC** (where A, B, C are a number from 0 to 5): The 256 ANSI color code. For the meaning of the values, see {@link https://github.com/jbnicolai/ansi-256-colors}
+* _x#_**ABC** (where A, B, C are a number from 0 to 5): The 256 ANSI color code. For the meaning of the values, see [ansi-256-colors](https://github.com/jbnicolai/ansi-256-colors).
 * _X#_**AABBCC** (where AA, BB, CC ranges from 00 to FF): The RGB HEX color code.
 * User defined styles (see ```chalkbars.style``` below).
 
@@ -90,7 +90,7 @@ The following shortcut helpers are also defined:
 
 Outputs a footer with a word between brackets
 
-It behaves like [B](#B) but it makes sure the message is printed to the right of the screen.
+It behaves like [B](#user-content-b) but it makes sure the message is printed to the right of the screen.
 
 ```javascript
 console.log(chalkbars("On the right you see a white 'INFO' word inside blue brackets {{E info}}"));
@@ -124,21 +124,21 @@ The default value is `true`.
 
 ### chalkbars.configuration.openingBracket
 
-The default template for the opening bracket in the [B](#B) and [E](#E) templates.
+The default template for the opening bracket in the [B](#user-content-b) and [E](#user-content-e) templates.
 
 The default value is `{{#C bracket}}[{{/C}}`.
 
 ### chalkbars.configuration.closingBracket
 
-The default template for the closing bracket in the [B](#B) and [E](#E) templates.
+The default template for the closing bracket in the [B](#user-content-b) and [E](#user-content-e) templates.
 
 The default value is `{{#C bracket}}]{{/C}}`.
 
 ### chalkbars.configuration.styles
 
-The list of valid chalk styles for the [C](#C), [B](#B) and [E](#E) templates.  
+The list of valid chalk styles for the [C](#user-content-c), [B](#user-content-b) and [E](#user-content-e) templates.  
 
-**Do not modify this directly but use [chalkbars.style](#chalkbars.style) instead.**
+**Do not modify this directly but use [chalkbars.style](#user-content-chalkbarsstylename-value) instead.**
 
 ## API Documentation
 
@@ -191,11 +191,11 @@ Simply a shortcut for `console.log(chalkbars.format(...));`.
 
 ### chalkbars.formatNoColor(...template, context)
 
-It behaves like [chalkbars.format](#chalkbars.format) but it removes all ANSI colors escapes code before returning.
+It behaves like [chalkbars.format](#user-content-chalkbarsformattemplate-context) but it removes all ANSI colors escapes code before returning.
 
 ### chalkbars.plainFormat(...template, context)
 
-It behaves like [chalkbars.format](#chalkbars.format) but it removes **all** ANSI escapes code before returning.
+It behaves like [chalkbars.format](#user-content-chalkbarsformattemplate-context) but it removes **all** ANSI escapes code before returning.
 
 ## Contributing to chalkbars
 
