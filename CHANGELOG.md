@@ -1,3 +1,7 @@
+### 2015-04-05 / 1.0.1 - The Easter release!
+
+* Changed default colors for debug and highlight.
+
 ### 2015-03-14 / 1.0.0 - The PI release!
 
 * Added JSDoc documentation.

@@ -85,9 +85,9 @@
     });
 
     it("should allow to fetch existing style", function(){
-      chalkbars.style("new-style-1", "red")
+      chalkbars.style("new-style-1", "red");
       expect(chalkbars.style("new-style-1")).to.equal("red");
-      chalkbars.style("new-style-1", "green")
+      chalkbars.style("new-style-1", "green");
       expect(chalkbars.style("new-style-1")).to.equal("green");
     });
 
@@ -123,7 +123,7 @@
     });
 
     it("should have a list of default styles", function(){
-      verify_format("{{#C \"highlight\"}}MESSAGE{{/C}}", chalk.cyan("MESSAGE"));
+      verify_format("{{#C \"highlight\"}}MESSAGE{{/C}}", "\x1b[1m\x1b[38;5;45mMESSAGE\x1b[39m\x1b[22m");
       verify_format("{{#C \"bracket\"}}MESSAGE{{/C}}", chalk.bold.blue("MESSAGE"));
       verify_format("{{#C \"info\"}}MESSAGE{{/C}}", chalk.bold.white("MESSAGE"));
       verify_format("{{#C \"skip\"}}MESSAGE{{/C}}", chalk.bold.gray("MESSAGE"));
@@ -134,7 +134,7 @@
       verify_format("{{#C \"fail\"}}MESSAGE{{/C}}", chalk.bold.red("MESSAGE"));
       verify_format("{{#C \"error\"}}MESSAGE{{/C}}", chalk.bold.red("MESSAGE"));
       verify_format("{{#C \"pass\"}}MESSAGE{{/C}}", chalk.bold.magenta("MESSAGE"));
-      verify_format("{{#C \"debug\"}}MESSAGE{{/C}}", "\x1b[1m\x1b[38;5;45mMESSAGE\x1b[39m\x1b[22m");
+      verify_format("{{#C \"debug\"}}MESSAGE{{/C}}", "\x1b[1m\x1b[38;5;127mMESSAGE\x1b[39m\x1b[22m");
     });
   });
 
