@@ -7,7 +7,7 @@
   "use strict";
 
   var chalk = require("chalk");
-  var renderTemplate = require("./lib/templating");
+  var templating = require("./lib/templating");
 
   /**
    * Compiles a Handlebars templates and then applies chalk colors.
@@ -33,7 +33,7 @@
 
     // Perform the handlebars compilation
     try{
-      return renderTemplate(args, context);
+      return templating.renderTemplate(args, context);
     }catch(e){
       // If it fails we return the raw source or raise an error
       if(module.exports.configuration.silent)
@@ -49,6 +49,20 @@
    * @module chalkbars
    */
   module.exports = {
+    /**
+     * The console library used by chalkbars.
+     *
+     * @type {object}
+     */
+    chalk: templating.chalk,
+
+    /**
+     * The templating library used by chalkbars.
+     *
+     * @type {object}
+     */
+    handlebars: templating.handlebars,
+
     configuration: require("./lib/configuration"),
 
     style: require("./lib/functions").manageStyle,

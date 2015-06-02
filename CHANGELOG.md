@@ -1,3 +1,7 @@
+### 2015-04-05 / 1.1.0
+
+* Export handlebars and chalk to allow template registration.
+
 ### 2015-04-05 / 1.0.1 - The Easter release!
 
 * Changed default colors for debug and highlight.

@@ -65,7 +65,7 @@ console.log(chalkbars(&quot;{{#C red$bgYellow}}Same as above.{{/C}}&quot;));</co
 <ul>
 <li>Default Chalk styles.</li>
 <li><em>i#</em><strong>ABC</strong> (where ABC is a 3 digit number): The ANSI color code. Example: <strong>031</strong> is red foreground, <strong>042</strong> is green background.</li>
-<li><em>x#</em><strong>ABC</strong> (where A, B, C are a number from 0 to 5): The 256 ANSI color code. For the meaning of the values, see <a href="https://github.com/jbnicolai/ansi-256-colors">https://github.com/jbnicolai/ansi-256-colors</a></li>
+<li><em>x#</em><strong>ABC</strong> (where A, B, C are a number from 0 to 5): The 256 ANSI color code. For the meaning of the values, see <a href="https://github.com/jbnicolai/ansi-256-colors">ansi-256-colors</a>.</li>
 <li><em>X#</em><strong>AABBCC</strong> (where AA, BB, CC ranges from 00 to FF): The RGB HEX color code.</li>
 <li>User defined styles (see <code>chalkbars.style</code> below).</li>
 </ul>
@@ -90,7 +90,7 @@ console.log(chalkbars(&quot;{{B \&quot;what\&quot; \&quot;red.bgYellow\&quot;}} 
 <li><strong>BD</strong>: Shortand for <code>{{B &quot;debug&quot;}}</code></li>
 </ul>
 <h3>E</h3><p>Outputs a footer with a word between brackets</p>
-<p>It behaves like <a href="#B">B</a> but it makes sure the message is print to the right of the screen.</p>
+<p>It behaves like <a href="#user-content-b">B</a> but it makes sure the message is printed to the right of the screen.</p>
 <pre class="prettyprint source lang-javascript"><code>console.log(chalkbars(&quot;On the right you see a white 'INFO' word inside blue brackets {{E info}}&quot;));
 console.log(chalkbars(&quot;On the right you see a red 'INFO' word inside blue brackets {{E \&quot;info\&quot; \&quot;red\&quot;}}&quot;));
 console.log(chalkbars(&quot;Omitting quotes might lead to unwanted behavior {{E info red}}&quot;));
@@ -108,17 +108,17 @@ console.log(chalkbars(&quot;On the right you see a red on yellow background 'WHA
 <h2>Configuring Chalkbars</h2><h3>chalkbars.configuration.silent</h3><p>Whether to ignore exceptions when compiling a Handlebars template fails. </p>
 <p>If set to <code>false</code> a compilation failure will raise an exception.</p>
 <p>The default value is <code>true</code>.</p>
-<h3>chalkbars.configuration.openingBracket</h3><p>The default template for the opening bracket in the <a href="#B">B</a> and <a href="#E">E</a> templates.</p>
+<h3>chalkbars.configuration.openingBracket</h3><p>The default template for the opening bracket in the <a href="#user-content-b">B</a> and <a href="#user-content-e">E</a> templates.</p>
 <p>The default value is <code>{{#C bracket}}[{{/C}}</code>.</p>
-<h3>chalkbars.configuration.closingBracket</h3><p>The default template for the closing bracket in the <a href="#B">B</a> and <a href="#E">E</a> templates.</p>
+<h3>chalkbars.configuration.closingBracket</h3><p>The default template for the closing bracket in the <a href="#user-content-b">B</a> and <a href="#user-content-e">E</a> templates.</p>
 <p>The default value is <code>{{#C bracket}}]{{/C}}</code>.</p>
-<h3>chalkbars.configuration.styles</h3><p>The list of valid chalk styles for the <a href="#C">C</a>, <a href="#B">B</a> and <a href="#E">E</a> templates.  </p>
-<p><strong>Do not modify this directly but use <a href="#chalkbars.style">chalkbars.style</a> instead.</strong></p>
+<h3>chalkbars.configuration.styles</h3><p>The list of valid chalk styles for the <a href="#user-content-c">C</a>, <a href="#user-content-b">B</a> and <a href="#user-content-e">E</a> templates.  </p>
+<p><strong>Do not modify this directly but use <a href="#user-content-chalkbarsstylename-value">chalkbars.style</a> instead.</strong></p>
 <h2>API Documentation</h2><h3>chalkbars.format(...template, context)</h3><p>It compiles the template (you can pass multiple templates, they will be concatenated) using Handlebars and applying chalk and custom styles.</p>
 <p>If the last argument is a object, it will be passed as the context to Handlebars.</p>
 <p>If might or not raise an exception depending on the value of <code>chalkbars.configuration.silent</code>.</p>
 <p>Example:</p>
-<pre class="prettyprint source lang-javascript"><code>console.log(chalkbars.format(&quot;{{#C red}}This is in red{{/C}} and this is not.&quot;));</code></pre><h1>TODO</h1><h3>chalkbars.style(name, value)</h3><p>Get or sets a chalkbars style. Returns <code>undefined</code> when a style is not defined. </p>
+<pre class="prettyprint source lang-javascript"><code>console.log(chalkbars.format(&quot;{{#C red}}This is in red{{/C}} and this is not.&quot;));</code></pre><h3>chalkbars.style(name, value)</h3><p>Get or sets a chalkbars style. Returns <code>undefined</code> when a style is not defined. </p>
 <p>When <code>value</code> is omitted, it returns the current value of the style.</p>
 <p>When <code>value</code> is <code>null</code>, it returns the current value of the style and then deletes the style.</p>
 <p>When <code>value</code> is a string, it sets the new value of the style and then returns the value itself.</p>
@@ -136,8 +136,10 @@ console.log(chalkbars.style(&quot;custom&quot;, null));
 // => &quot;green&quot;
 console.log(chalkbars.style(&quot;custom&quot;));
 // => undefined</code></pre><h3>chalkbars.log(...template, context)</h3><p>Simply a shortcut for <code>console.log(chalkbars.format(...));</code>.</p>
-<h3>chalkbars.formatNoColor(...template, context)</h3><p>It behaves like <a href="#chalkbars.format">chalkbars.format</a> but it removes all ANSI colors escapes code before returning.</p>
-<h3>chalkbars.plainFormat(...template, context)</h3><p>It behaves like <a href="#chalkbars.format">chalkbars.format</a> but it removes <strong>all</strong> ANSI escapes code before returning.</p>
+<h3>chalkbars.formatNoColor(...template, context)</h3><p>It behaves like <a href="#user-content-chalkbarsformattemplate-context">chalkbars.format</a> but it removes all ANSI colors escapes code before returning.</p>
+<h3>chalkbars.plainFormat(...template, context)</h3><p>It behaves like <a href="#user-content-chalkbarsformattemplate-context">chalkbars.format</a> but it removes <strong>all</strong> ANSI escapes code before returning.</p>
+<h3>chalkbars.chalk</h3><p>The console library used by chalkbars. More information <a href="https://www.npmjs.com/package/chalk">here</a>.</p>
+<h3>chalkbars.handlebars</h3><p>The templating library used by chalkbars. More information <a href="http://handlebarsjs.com">here</a>.</p>
 <h2>Contributing to chalkbars</h2><ul>
 <li>Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.</li>
 <li>Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.</li>
@@ -164,7 +166,7 @@ console.log(chalkbars.style(&quot;custom&quot;));
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta2</a> on Sat Mar 14 2015 14:21:06 GMT-0700 (PDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta2</a> on Tue Jun 02 2015 10:51:24 GMT-0700 (PDT)
 </footer>
 
 <script> prettyPrint(); </script>

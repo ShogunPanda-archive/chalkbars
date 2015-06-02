@@ -197,6 +197,14 @@ It behaves like [chalkbars.format](#user-content-chalkbarsformattemplate-context
 
 It behaves like [chalkbars.format](#user-content-chalkbarsformattemplate-context) but it removes **all** ANSI escapes code before returning.
 
+### chalkbars.chalk
+
+The console library used by chalkbars. More information [here](https://www.npmjs.com/package/chalk).
+
+### chalkbars.handlebars
+
+The templating library used by chalkbars. More information [here](http://handlebarsjs.com).
+
 ## Contributing to chalkbars
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
