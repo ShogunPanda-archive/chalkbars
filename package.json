@@ -13,8 +13,8 @@
     "postpublish": "git tag -f v-$npm_package_version && git push origin --tags && git push origin",
     "test": "./node_modules/.bin/mocha",
     "posttest": "./node_modules/.bin/eslint main.js lib/*.js test/*.js",
-    "coverage": "./node_modules/.bin/mocha --require blanket -R html-cov > coverage.html; true",
-    "travis-ci": "./node_modules/.bin/mocha --require blanket -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js; true",
+    "coverage": "./node_modules/.bin/istanbul --report=html cover ./node_modules/.bin/_mocha",
+    "travis-ci": "./node_modules/.bin/istanbul --report=lcovonly cover ./node_modules/.bin/_mocha && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "docs": "./node_modules/.bin/jsdoc -c .jsdoc.json -t ./node_modules/ink-docstrap/template -R README.md -r"
   },
   "repository": {
@@ -38,23 +38,13 @@
     "handlebars": "~4.0.5"
   },
   "devDependencies": {
-    "blanket": "~1.2.3",
     "coveralls": "~2.11.8",
     "eslint": "~2.4.0",
     "expecting": "~0.1.0",
-    "jsdoc": "~3.4.0",
     "ink-docstrap": "~1.1.4",
+    "istanbul": "~0.4.2",
+    "jsdoc": "~3.4.0",
     "mocha": "~2.4.5",
-    "mocha-lcov-reporter": "~1.2.0",
     "sinon": "~1.17.3"
-  },
-  "config": {
-    "blanket": {
-      "pattern": [
-        "main.js",
-        "lib"
-      ],
-      "data-cover-never": "node_modules"
-    }
   }
 }
