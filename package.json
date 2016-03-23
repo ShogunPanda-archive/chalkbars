@@ -1,6 +1,6 @@
 {
   "name": "chalkbars",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Template based terminal coloring based on Chalk and Handlebars.",
   "main": "main.js",
   "files": [
