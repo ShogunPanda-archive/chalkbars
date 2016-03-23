@@ -10,6 +10,15 @@
     "readme": "README.md"
   },
   "templates": {
-    "theme": "sandstone"
+    "systemName": "Chalkbars",
+    "copyright": "2015 and above Shogun <shogun@cowtech.it>",
+    "includeDate": false,
+    "navType": "vertical",
+    "theme": "sandstone",
+    "linenums": true,
+    "collapseSymbols": false,
+    "inverseNav": true,
+    "syntaxTheme": "dark",
+    "sort": false
   }
 }
