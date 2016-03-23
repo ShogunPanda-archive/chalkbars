@@ -38,9 +38,9 @@
     "handlebars": "~4.0.5"
   },
   "devDependencies": {
+    "chai": "~3.5.0",
     "coveralls": "~2.11.8",
     "eslint": "~2.4.0",
-    "expecting": "~0.1.0",
     "ink-docstrap": "~1.1.4",
     "istanbul": "~0.4.2",
     "jsdoc": "~3.4.0",

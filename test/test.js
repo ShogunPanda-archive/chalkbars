@@ -4,7 +4,9 @@
 //
 
 /* globals describe, it */
-const expect = require("expecting");
+/* eslint-disable no-unused-expressions */
+
+const expect = require("chai").expect;
 const sinon = require("sinon");
 const chalk = require("chalk");
 const chalkbars = require("../main");
@@ -57,7 +59,13 @@ describe("chalkbars.format", () => {
 
     it("should throw the exception when silent mode is disabled", () => {
       chalkbars.configuration.silent = false;
-      expect(chalkbars.format).withArgs("{{#C custom}}MESSAGE").to.throwException();
+
+      const wrapper = function(){
+        chalkbars.format("{{#C custom}}MESSAGE");
+      };
+
+      expect(wrapper).to.throw(/Parse error on line 1/);
+
       chalkbars.configuration.silent = true;
     });
   });
@@ -76,8 +84,8 @@ describe("chalkbars.format", () => {
 
 describe("chalkbars.style", () => {
   it("should allow to fetch existing style", () => {
-    expect(chalkbars.style()).to.not.be.ok();
-    expect(chalkbars.style("")).to.not.be.ok();
+    expect(chalkbars.style()).to.not.exist;
+    expect(chalkbars.style("")).to.not.exist;
     expect(chalkbars.style("bracket")).to.equal("bold blue");
   });
 
@@ -97,21 +105,33 @@ describe("chalkbars.style", () => {
     expect(chalkbars.style("new-style-2", "")).to.equal("green");
     expect(chalkbars.style("new-style-3", false)).to.equal("blue");
 
-    expect(chalkbars.style("new-style-1")).to.not.be.ok();
-    expect(chalkbars.style("new-style-2")).to.not.be.ok();
-    expect(chalkbars.style("new-style-3")).to.not.be.ok();
+    expect(chalkbars.style("new-style-1")).to.not.exist;
+    expect(chalkbars.style("new-style-2")).to.not.exist;
+    expect(chalkbars.style("new-style-3")).to.not.exist;
   });
 
   it("should NOT allow to shadow a chalk style", () => {
-    expect(chalkbars.style).withArgs("red", "yellow").to.throwException(/Cannot use "red" as a custom style name as it would shadow a chalk style/);
+    const wrapper = function(){
+      chalkbars.style("red", "yellow");
+    };
+
+    expect(wrapper).to.throw(/Cannot use "red" as a custom style name as it would shadow a chalk style/);
   });
 
-  it("should NOT allow to INNERine nested styles", () => {
-    expect(chalkbars.style).withArgs("new-style-2", "bracket").to.throwException(/Nesting of custom styles is not supported/);
+  it("should NOT allow to define nested styles", () => {
+    const wrapper = function(){
+      chalkbars.style("new-style-2", "bracket");
+    };
+
+    expect(wrapper).to.throw(/Nesting of custom styles is not supported/);
   });
 
   it("should NOT allow values different from string", () => {
-    expect(chalkbars.style).withArgs("new-style-2", {a: 1}).to.throwException(/Only strings are supported a values for styles/);
+    const wrapper = function(){
+      chalkbars.style("new-style-2", {a: 1});
+    };
+
+    expect(wrapper).to.throw(/Only strings are supported a values for styles/);
   });
 
   it("should resolve styles in templates", () => {
@@ -156,8 +176,8 @@ describe("chalkbars.log", () => {
     chalkbars.log("{{#C red}}{{field}}{{/C}}", {field: "FIELD"});
     chalkbars.log("{{B warn}} Message {{E skip}}");
 
-    expect(stub.withArgs(chalk.red("FIELD")).calledOnce).to.be(true);
-    expect(stub.withArgs(chalkbars.format("{{B warn}} Message {{E skip}}")).calledOnce).to.be(true);
+    expect(stub.withArgs(chalk.red("FIELD")).calledOnce).to.be.true;
+    expect(stub.withArgs(chalkbars.format("{{B warn}} Message {{E skip}}")).calledOnce).to.be.true;
 
     stub.restore();
   });
@@ -170,8 +190,8 @@ describe("chalkbars.error", () => {
     chalkbars.error("{{#C red}}{{field}}{{/C}}", {field: "FIELD"});
     chalkbars.error("{{B warn}} Message {{E skip}}");
 
-    expect(stub.withArgs(chalk.red("FIELD")).calledOnce).to.be(true);
-    expect(stub.withArgs(chalkbars.format("{{B warn}} Message {{E skip}}")).calledOnce).to.be(true);
+    expect(stub.withArgs(chalk.red("FIELD")).calledOnce).to.be.true;
+    expect(stub.withArgs(chalkbars.format("{{B warn}} Message {{E skip}}")).calledOnce).to.be.true;
 
     stub.restore();
   });
@@ -243,3 +263,5 @@ describe("chalkbars handlebars helpers", () => {
     chalkbars.configuration.closingBracket = oldClosing;
   });
 });
+
+/* eslint-enable no-unused-expressions */
