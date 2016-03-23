@@ -8,5 +8,8 @@
     "destination": "./docs/",
     "recurse": true,
     "readme": "README.md"
+  },
+  "templates": {
+    "theme": "sandstone"
   }
 }

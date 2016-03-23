@@ -23,7 +23,7 @@ console.log(chalkbars("{{#C red}}This is in red{{/C}} and this is not."));
 
 ## Supported implementations.
 
-Chalkbars supports and has been tested on [NodeJS](http://nodejs.org) 0.10+ and [io.js](http://iojs.org) 1.0+. 
+Chalkbars supports and has been tested on [NodeJS](http://nodejs.org) 5.0+. 
 
 ## Chalkbars Handlebars helpers
 

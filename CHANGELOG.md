@@ -1,3 +1,9 @@
+### 2016-03-23 / 2.0.0
+
+* **Dropped support for Node < 5.**
+* Added `chalkbars.error`, which is a shorthand for `console.error(chalkbars.format(...))`.
+* Update versions of Chalk and Handlebars.
+
 ### 2015-04-05 / 1.1.0
 
 * Export handlebars and chalk to allow template registration.

@@ -3,107 +3,120 @@
  * Licensed under the MIT license, which can be found at http://www.opensource.org/licenses/mit-license.php.
  */
 
-(function(){
+const chalk = require("chalk");
+const templating = require("./lib/templating");
+const configuration = require("./lib/configuration");
+const style = require("./lib/functions").manageStyle;
+
+/**
+ * Compiles a Handlebars templates and then applies chalk colors.
+ *
+ * @alias module:chalkbars.format
+ * @param {...string} template - The template to compile. You can specify more than one string, they will be concatenated.
+ * @param {object} context - The context for the Handlebars template.
+ * @returns {string} The compiled template with color styles applied.
+ */
+const format = function(){
   "use strict";
 
-  var chalk = require("chalk");
-  var templating = require("./lib/templating");
+  const args = Array.prototype.slice.call(arguments, 0);
+
+  if(!args.length)
+    return "";
+
+  // Get the last element and check whether is a object.
+  let context = args.pop();
+
+  if(!context || typeof context !== "object"){
+    args.push(context);
+    context = {};
+  }
+
+  // Perform the handlebars compilation
+  try{
+    return templating.renderTemplate(args, context);
+  }catch(e){
+    // If it fails we return the raw source or raise an error
+    if(module.exports.configuration.silent)
+      return args.join("");
+
+    throw e;
+  }
+};
+
+/**
+ * Chalkbars module.
+ *
+ * @module chalkbars
+ */
+module.exports = {
+  /**
+   * The console library used by chalkbars.
+   *
+   * @type {object}
+   */
+  chalk: templating.chalk,
 
   /**
-   * Compiles a Handlebars templates and then applies chalk colors.
+   * The templating library used by chalkbars.
    *
-   * @alias module:chalkbars.format
+   * @type {object}
+   */
+  handlebars: templating.handlebars,
+
+  configuration,
+
+  style,
+
+  format,
+
+  /**
+   * Compiles a Handlebars templates and then it strips out all ANSI color sequences.
+   * {@see format}
+   *
    * @param {...string} template - The template to compile. You can specify more than one string, they will be concatenated.
    * @param {object} context - The context for the Handlebars template.
-   * @returns {string} The compiled template with color styles applied.
+   * @returns {string} The compiled template with color styles removed.
    */
-  var format = function(){
-    if(!arguments.length)
-      return "";
-
-    var args = Array.prototype.slice.call(arguments, 0);
-
-    // Get the last element and check whether is a object.
-    var context = args.pop();
-
-    if(!context || typeof context !== "object"){
-      args.push(context);
-      context = {};
-    }
-
-    // Perform the handlebars compilation
-    try{
-      return templating.renderTemplate(args, context);
-    }catch(e){
-      // If it fails we return the raw source or raise an error
-      if(module.exports.configuration.silent)
-        return args.join("");
-
-      throw e;
-    }
-  };
+  formatNoColor(){
+    const args = Array.prototype.slice.call(arguments, 0);
+    return format.apply(this, args).replace(/\u001b\[(?:[0-9]{1,3}(?:;[0-9]{1,3})*)?[m|K]/g, "");
+  },
 
   /**
-   * Chalkbars module.
+   * Compiles a Handlebars templates and then it strips out all ANSI escape sequences.
+   * {@see format}
    *
-   * @module chalkbars
+   * @param {...string} template - The template to compile. You can specify more than one string, they will be concatenated.
+   * @param {object} context - The context for the Handlebars template.
+   * @returns {string} The compiled template with ANSI escape sequences removed.
    */
-  module.exports = {
-    /**
-     * The console library used by chalkbars.
-     *
-     * @type {object}
-     */
-    chalk: templating.chalk,
+  plainFormat(){
+    const args = Array.prototype.slice.call(arguments, 0);
+    return chalk.stripColor(format.apply(this, args));
+  },
 
-    /**
-     * The templating library used by chalkbars.
-     *
-     * @type {object}
-     */
-    handlebars: templating.handlebars,
+  /**
+   * Compiles a Handlebars templates and then outputs it to the console.
+   * {@see format}
+   *
+   * @param {...string} template - The template to compile. You can specify more than one string, they will be concatenated.
+   * @param {object} context - The context for the Handlebars template.
+   */
+  log(){
+    const args = Array.prototype.slice.call(arguments, 0);
+    console.log(format.apply(this, args));
+  },
 
-    configuration: require("./lib/configuration"),
-
-    style: require("./lib/functions").manageStyle,
-
-    format: format,
-
-    /**
-     * Compiles a Handlebars templates and then it strips out all ANSI color sequences.
-     * {@see format}
-     *
-     * @param {...string} template - The template to compile. You can specify more than one string, they will be concatenated.
-     * @param {object} context - The context for the Handlebars template.
-     * @returns {string} The compiled template with color styles removed.
-     */
-    formatNoColor: function(){
-      var message = format.apply(this, arguments);
-      return message.replace(/\u001b\[(?:[0-9]{1,3}(?:;[0-9]{1,3})*)?[m|K]/g, "");
-    },
-
-    /**
-     * Compiles a Handlebars templates and then it strips out all ANSI escape sequences.
-     * {@see format}
-     *
-     * @param {...string} template - The template to compile. You can specify more than one string, they will be concatenated.
-     * @param {object} context - The context for the Handlebars template.
-     * @returns {string} The compiled template with ANSI escape sequences removed.
-     */
-    plainFormat: function(){
-      return chalk.stripColor(format.apply(this, arguments));
-    },
-
-
-    /**
-     * Compiles a Handlebars templates and then outputs it to the console.
-     * {@see format}
-     *
-     * @param {...string} template - The template to compile. You can specify more than one string, they will be concatenated.
-     * @param {object} context - The context for the Handlebars template.
-     */
-    log: function(){
-      return console.log(format.apply(this, arguments));
-    }
-  };
-})();
+  /**
+   * Compiles a Handlebars templates and then outputs it to the console as error.
+   * {@see format}
+   *
+   * @param {...string} template - The template to compile. You can specify more than one string, they will be concatenated.
+   * @param {object} context - The context for the Handlebars template.
+   */
+  error(){
+    const args = Array.prototype.slice.call(arguments, 0);
+    console.error(format.apply(this, args));
+  }
+};
