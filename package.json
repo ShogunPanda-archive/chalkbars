@@ -10,7 +10,6 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "postpublish": "git tag -f v-$npm_package_version && git push origin --tags && git push origin",
     "test": "./node_modules/.bin/mocha",
     "posttest": "./node_modules/.bin/eslint main.js lib/*.js test/*.js",
     "coverage": "./node_modules/.bin/istanbul --report=html cover ./node_modules/.bin/_mocha",
