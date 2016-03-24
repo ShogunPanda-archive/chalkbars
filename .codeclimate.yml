@@ -11,7 +11,5 @@ exclude_paths:
 engines:
   eslint:
     enabled: true
-  env:
-    node: true
-    mocha: true
-    es6: true
+    config:
+      config: .eslintrc.json
