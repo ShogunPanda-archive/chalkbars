@@ -1,7 +1,7 @@
-//
-// This file is part of the chalkbars node module. Copyright (C) 2015 and above Shogun <shogun@cowtech.it>.
-// Licensed under the MIT license, which can be found at http://www.opensource.org/licenses/mit-license.php.
-//
+/*
+ * This file is part of the chalkbars npm package. Copyright (C) 2015 and above Shogun <shogun@cowtech.it>.
+ * Licensed under the MIT license, which can be found at http://www.opensource.org/licenses/mit-license.php.
+ */
 
 /* globals describe, it */
 /* eslint-disable no-unused-expressions */
