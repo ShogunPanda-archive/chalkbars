@@ -3,7 +3,6 @@
 [![Gem Version](https://badge.fury.io/js/chalkbars.png)](http://badge.fury.io/js/chalkbars)
 [![Dependency Status](https://gemnasium.com/ShogunPanda/chalkbars.png?travis)](https://gemnasium.com/ShogunPanda/chalkbars)
 [![Build Status](https://secure.travis-ci.org/ShogunPanda/chalkbars.png?branch=master)](http://travis-ci.org/ShogunPanda/chalkbars)
-[![Code Climate](https://codeclimate.com/github/ShogunPanda/chalkbars.png)](https://codeclimate.com/github/ShogunPanda/chalkbars)
 [![Coverage Status](https://coveralls.io/repos/ShogunPanda/chalkbars/badge.png)](https://coveralls.io/r/ShogunPanda/chalkbars)
 
 Template based terminal coloring based on [Chalk](https://www.npmjs.com/package/chalk) and [Handlebars](http://handlebarsjs.com).
