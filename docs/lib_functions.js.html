@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib/functions.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="chalkbars.module_configuration.html">configuration</a></li><li><a href="module-chalkbars.html">chalkbars</a><ul class='methods'><li data-type='method'><a href="module-chalkbars.html#.error">error</a></li><li data-type='method'><a href="module-chalkbars.html#.format">format</a></li><li data-type='method'><a href="module-chalkbars.html#.formatNoColor">formatNoColor</a></li><li data-type='method'><a href="module-chalkbars.html#.log">log</a></li><li data-type='method'><a href="module-chalkbars.html#.plainFormat">plainFormat</a></li><li data-type='method'><a href="module-chalkbars.html#.style">style</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">lib/functions.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ * This file is part of the chalkbars npm package. Copyright (C) 2015 and above Shogun &lt;shogun@cowtech.it>.
+ * Licensed under the MIT license, which can be found at http://www.opensource.org/licenses/mit-license.php.
+ */
+
+const chalk = require("chalk");
+const styles = require("./configuration").styles;
+
+const HEX = 16;
+const TO_RGB_R = 36;
+const TO_RGB_G = 6;
+const TO_RGB_TYPE = 5;
+const FROM_RGB_R = 2;
+const FROM_RGB_G = 4;
+const FROM_RGB_B = 6;
+const FOREGROUND_TAG = 38;
+const BACKGROUND_TAG = 48;
+
+module.exports = {
+  parseStyles(raw){
+    raw = raw.toString().replace(/[^a-z0-9#_-]/ig, " "); // Replace other characters with a space
+
+    // Replace with custom styles
+    return raw.replace(/\S+/ig, style => module.exports.manageStyle(style) || style);
+  },
+
+  embedInColor(subject, color, type, background){
+    const tags = background ? [BACKGROUND_TAG, BACKGROUND_TAG + 1] : [FOREGROUND_TAG, FOREGROUND_TAG + 1];
+    return `\x1b[${tags[0]};${type};${color}m${subject}\x1b[${tags[1]}m`;
+  },
+
+  embedIn256Color(subject, r, g, b, background){
+    r = parseInt(r, 10) || 0;
+    g = parseInt(g, 10) || 0;
+    b = parseInt(b, 10) || 0;
+
+    return module.exports.embedInColor(subject, HEX + (r * TO_RGB_R) + (g * TO_RGB_G) + b, TO_RGB_TYPE, background); // eslint-disable-line no-extra-parens
+  },
+
+  embedInHexColor(subject, color, background){
+    const r = parseInt(color.substring(0, FROM_RGB_R), HEX) || 0;
+    const g = parseInt(color.substring(FROM_RGB_R, FROM_RGB_G), HEX) || 0;
+    const b = parseInt(color.substring(FROM_RGB_G, FROM_RGB_B), HEX) || 0;
+
+    return module.exports.embedInColor(subject, `${r};${g};${b}`, 2, background);
+  },
+
+  /**
+   * Get or sets a chalkbars style.
+   *
+   * @alias module:chalkbars.style
+   * @param {string} name - The name of the style. It **must not** overwrite a existing chalk style.
+   * @param {string|null|undefined} [value] -
+   * * When omitted, it returns the current value of the style.
+   * * When `null`, it returns the current value of the style and then deletes the style.
+   * * When a string, it sets the new value of the style and then returns the value itself.
+   *
+   * @returns {string|undefined} The value of the style or `undefined`.
+   */
+  manageStyle(name, value){
+    if(value === "")
+      value = null;
+
+    switch(typeof value){
+      case "undefined": // Search the style
+        value = styles[name];
+        break;
+      case "string": // Define a new style
+        if(typeof chalk[name] === "function")
+          throw new RangeError(`Cannot use "${name}" as a custom style name as it would shadow a chalk style.`);
+
+        // Verify that the value does not contain other styles
+        value = value.replace(/[^a-z0-9#_-]/ig, " ");
+
+        value.split(/\s+/).forEach(style => {
+          if(module.exports.manageStyle(style))
+            throw new RangeError("Nesting of custom styles is not supported.");
+        });
+
+        styles[name] = value;
+        break;
+      default:
+        // Null is handled here because typeof null == "object" -
+        // If this if evaluates to true, then some truthy value different than a string was passed and this is not allow.
+        // If this if evaluates to false, then all falsey values will result in deleting the style.
+        if(value)
+          throw new TypeError("Only strings are supported a values for styles.");
+
+        // Delete a style. Return the current style as return value
+        value = styles[name];
+        delete styles[name]; // eslint-disable-line prefer-reflect
+        break;
+    }
+
+    return value;
+  }
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Aug 18 2016 14:44:28 GMT+0200 (CEST) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
