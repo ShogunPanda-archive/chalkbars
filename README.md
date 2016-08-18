@@ -3,7 +3,7 @@
 [![Gem Version](https://badge.fury.io/js/chalkbars.png)](http://badge.fury.io/js/chalkbars)
 [![Dependency Status](https://gemnasium.com/ShogunPanda/chalkbars.png?travis)](https://gemnasium.com/ShogunPanda/chalkbars)
 [![Build Status](https://secure.travis-ci.org/ShogunPanda/chalkbars.png?branch=master)](http://travis-ci.org/ShogunPanda/chalkbars)
-[![Coverage Status](https://coveralls.io/repos/ShogunPanda/chalkbars/badge.png)](https://coveralls.io/r/ShogunPanda/chalkbars)
+[![Coverage Status](https://coveralls.io/repos/github/ShogunPanda/chalkbars/badge.svg?branch=master)](https://coveralls.io/github/ShogunPanda/chalkbars?branch=master)
 
 Template based terminal coloring based on [Chalk](https://www.npmjs.com/package/chalk) and [Handlebars](http://handlebarsjs.com).
 
@@ -141,68 +141,7 @@ The list of valid chalk styles for the [C](#user-content-c), [B](#user-content-b
 
 ## API Documentation
 
-### chalkbars.format(...template, context)
-
-It compiles the template (you can pass multiple templates, they will be concatenated) using Handlebars and applying chalk and custom styles.
-
-If the last argument is a object, it will be passed as the context to Handlebars.
-
-If might or not raise an exception depending on the value of `chalkbars.configuration.silent`.
-
-Example:
-
-```javascript
-console.log(chalkbars.format("{{#C red}}This is in red{{/C}} and this is not."));
-```
-
-### chalkbars.style(name, value)
-
-Get or sets a chalkbars style. Returns `undefined` when a style is not defined. 
-
-When `value` is omitted, it returns the current value of the style.
-
-When `value` is `null`, it returns the current value of the style and then deletes the style.
-     
-When `value` is a string, it sets the new value of the style and then returns the value itself.
-
-Style nesting or overwriting a chalk style is not allowed.
- 
-Examples: 
-
-```javascript
-console.log(chalkbars.style("custom"));
-// => undefined
-console.log(chalkbars.style("custom", "red"));
-// => "red"
-console.log(chalkbars.style("custom"));
-// => "red"
-console.log(chalkbars.style("custom", "green"));
-// => "green"
-console.log(chalkbars.style("custom", null));
-// => "green"
-console.log(chalkbars.style("custom"));
-// => undefined
-```
-
-### chalkbars.log(...template, context)
-
-Simply a shortcut for `console.log(chalkbars.format(...));`.
-
-### chalkbars.formatNoColor(...template, context)
-
-It behaves like [chalkbars.format](#user-content-chalkbarsformattemplate-context) but it removes all ANSI colors escapes code before returning.
-
-### chalkbars.plainFormat(...template, context)
-
-It behaves like [chalkbars.format](#user-content-chalkbarsformattemplate-context) but it removes **all** ANSI escapes code before returning.
-
-### chalkbars.chalk
-
-The console library used by chalkbars. More information [here](https://www.npmjs.com/package/chalk).
-
-### chalkbars.handlebars
-
-The templating library used by chalkbars. More information [here](http://handlebarsjs.com).
+The API documentation can be found [here](https://sw.cowtech.it/chalkbars/docs).
 
 ## Contributing to chalkbars
 

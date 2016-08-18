@@ -15,7 +15,7 @@
     "posttest": "./node_modules/.bin/eslint main.js lib/*.js test/*.js",
     "coverage": "./node_modules/.bin/istanbul --report=html cover ./node_modules/.bin/_mocha",
     "travis-ci": "./node_modules/.bin/istanbul --report=lcovonly cover ./node_modules/.bin/_mocha && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "docs": "./node_modules/.bin/jsdoc -c .jsdoc.json -t ./node_modules/ink-docstrap/template -R README.md -r"
+    "docs": "./node_modules/.bin/jsdoc -c .jsdoc.json -t ./node_modules/minami -R README.md -r"
   },
   "repository": {
     "type": "git",
@@ -41,9 +41,9 @@
     "chai": "~3.5.0",
     "coveralls": "~2.11.8",
     "eslint": "~2.4.0",
-    "ink-docstrap": "~1.1.4",
     "istanbul": "~0.4.2",
     "jsdoc": "~3.4.0",
+    "minami": "~1.1.1",
     "mocha": "~2.4.5",
     "sinon": "~1.17.3"
   }

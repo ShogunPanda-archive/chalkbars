@@ -1,70 +1,39 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
-	<title>Chalkbars Index</title>
+    <meta charset="utf-8">
+    <title>Home - Documentation</title>
 
-	<!--[if lt IE 9]>
-	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-	<link type="text/css" rel="stylesheet" href="styles/sunlight.dark.css">
-
-	<link type="text/css" rel="stylesheet" href="styles/site.sandstone.css">
-
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
 </head>
-
 <body>
 
-<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
-<div class="container">
-	<div class="navbar-header">
-		<a class="navbar-brand" href="index.html">Chalkbars</a>
-		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-        </button>
-	</div>
-	<div class="navbar-collapse collapse" id="topNavigation">
-		<ul class="nav navbar-nav">
-			
-			<li class="dropdown">
-				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
-					<li><a href="module-chalkbars.html">chalkbars</a></li><li><a href="chalkbars.module_configuration.html">chalkbars.configuration</a></li>
-				</ul>
-			</li>
-			
-		</ul>
-		<div class="col-sm-3 col-md-3">
-            <form class="navbar-form" role="search">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
-                    </div>
-                </div>
-            </form>
-        </div>
-	</div>
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
 
-</div>
-</div>
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="chalkbars.module_configuration.html">configuration</a></li><li><a href="module-chalkbars.html">chalkbars</a><ul class='methods'><li data-type='method'><a href="module-chalkbars.html#.error">error</a></li><li data-type='method'><a href="module-chalkbars.html#.format">format</a></li><li data-type='method'><a href="module-chalkbars.html#.formatNoColor">formatNoColor</a></li><li data-type='method'><a href="module-chalkbars.html#.log">log</a></li><li data-type='method'><a href="module-chalkbars.html#.plainFormat">plainFormat</a></li><li data-type='method'><a href="module-chalkbars.html#.style">style</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+
+    
 
 
-<div class="container" id="toc-content">
-<div class="row">
 
-	
-	<div class="col-md-8">
-	
-		<div id="main">
-			
-
-	
-	
+    
 
 
 
@@ -74,21 +43,14 @@
 
 
 
+    
 
 
-	
-	
-
-
-
-
-
-    <section class="readme-section">
+    <section class="readme">
         <article><h1>chalkbars</h1><p><a href="http://badge.fury.io/js/chalkbars"><img src="https://badge.fury.io/js/chalkbars.png" alt="Gem Version"></a>
 <a href="https://gemnasium.com/ShogunPanda/chalkbars"><img src="https://gemnasium.com/ShogunPanda/chalkbars.png?travis" alt="Dependency Status"></a>
 <a href="http://travis-ci.org/ShogunPanda/chalkbars"><img src="https://secure.travis-ci.org/ShogunPanda/chalkbars.png?branch=master" alt="Build Status"></a>
-<a href="https://codeclimate.com/github/ShogunPanda/chalkbars"><img src="https://codeclimate.com/github/ShogunPanda/chalkbars.png" alt="Code Climate"></a>
-<a href="https://coveralls.io/r/ShogunPanda/chalkbars"><img src="https://coveralls.io/repos/ShogunPanda/chalkbars/badge.png" alt="Coverage Status"></a></p>
+<a href="https://coveralls.io/github/ShogunPanda/chalkbars.js?branch=master"><img src="https://coveralls.io/repos/github/ShogunPanda/chalkbars/badge.svg?branch=master" alt="Coverage Status"></a></p>
 <p>Template based terminal coloring based on <a href="https://www.npmjs.com/package/chalk">Chalk</a> and <a href="http://handlebarsjs.com">Handlebars</a>.</p>
 <p>http://sw.cowtech.it/chalkbars</p>
 <h2>Usage</h2><p>Chalkbars allows an easier use of chalk on the console taking advantage of the awesome Handlebars templating engine.</p>
@@ -155,32 +117,7 @@ console.log(chalkbars(&quot;On the right you see a red on yellow background 'WHA
 <p>The default value is <code>{{#C bracket}}]{{/C}}</code>.</p>
 <h3>chalkbars.configuration.styles</h3><p>The list of valid chalk styles for the <a href="#user-content-c">C</a>, <a href="#user-content-b">B</a> and <a href="#user-content-e">E</a> templates.  </p>
 <p><strong>Do not modify this directly but use <a href="#user-content-chalkbarsstylename-value">chalkbars.style</a> instead.</strong></p>
-<h2>API Documentation</h2><h3>chalkbars.format(...template, context)</h3><p>It compiles the template (you can pass multiple templates, they will be concatenated) using Handlebars and applying chalk and custom styles.</p>
-<p>If the last argument is a object, it will be passed as the context to Handlebars.</p>
-<p>If might or not raise an exception depending on the value of <code>chalkbars.configuration.silent</code>.</p>
-<p>Example:</p>
-<pre class="prettyprint source lang-javascript"><code>console.log(chalkbars.format(&quot;{{#C red}}This is in red{{/C}} and this is not.&quot;));</code></pre><h3>chalkbars.style(name, value)</h3><p>Get or sets a chalkbars style. Returns <code>undefined</code> when a style is not defined. </p>
-<p>When <code>value</code> is omitted, it returns the current value of the style.</p>
-<p>When <code>value</code> is <code>null</code>, it returns the current value of the style and then deletes the style.</p>
-<p>When <code>value</code> is a string, it sets the new value of the style and then returns the value itself.</p>
-<p>Style nesting or overwriting a chalk style is not allowed.</p>
-<p>Examples: </p>
-<pre class="prettyprint source lang-javascript"><code>console.log(chalkbars.style(&quot;custom&quot;));
-// => undefined
-console.log(chalkbars.style(&quot;custom&quot;, &quot;red&quot;));
-// => &quot;red&quot;
-console.log(chalkbars.style(&quot;custom&quot;));
-// => &quot;red&quot;
-console.log(chalkbars.style(&quot;custom&quot;, &quot;green&quot;));
-// => &quot;green&quot;
-console.log(chalkbars.style(&quot;custom&quot;, null));
-// => &quot;green&quot;
-console.log(chalkbars.style(&quot;custom&quot;));
-// => undefined</code></pre><h3>chalkbars.log(...template, context)</h3><p>Simply a shortcut for <code>console.log(chalkbars.format(...));</code>.</p>
-<h3>chalkbars.formatNoColor(...template, context)</h3><p>It behaves like <a href="#user-content-chalkbarsformattemplate-context">chalkbars.format</a> but it removes all ANSI colors escapes code before returning.</p>
-<h3>chalkbars.plainFormat(...template, context)</h3><p>It behaves like <a href="#user-content-chalkbarsformattemplate-context">chalkbars.format</a> but it removes <strong>all</strong> ANSI escapes code before returning.</p>
-<h3>chalkbars.chalk</h3><p>The console library used by chalkbars. More information <a href="https://www.npmjs.com/package/chalk">here</a>.</p>
-<h3>chalkbars.handlebars</h3><p>The templating library used by chalkbars. More information <a href="http://handlebarsjs.com">here</a>.</p>
+<h2>API Documentation</h2><p>The API documentation can be found <a href="https://sw.cowtech.it/chalkbars/docs">here</a>.</p>
 <h2>Contributing to chalkbars</h2><ul>
 <li>Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.</li>
 <li>Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.</li>
@@ -198,130 +135,15 @@ console.log(chalkbars.style(&quot;custom&quot;));
 
 
 
-
-		</div>
-	</div>
-
-	<div class="clearfix"></div>
-
-	
-		<div class="col-md-3">
-			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
-		</div>
-	
-
-</div>
 </div>
 
-<div class="modal fade" id="searchResults">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Search results</h4>
-      </div>
-      <div class="modal-body"></div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div>
+<br class="clear">
 
 <footer>
-
-
-	<span class="copyright">
-	2015 and above Shogun <shogun@cowtech.it>
-	</span>
-
-<span class="jsdoc-message">
-	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a>
-	
-	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
-</span>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Aug 18 2016 14:44:28 GMT+0200 (CEST) using the Minami theme.
 </footer>
 
-<script src="scripts/docstrap.lib.js"></script>
-<script src="scripts/toc.js"></script>
-<script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
-
-<script>
-$( function () {
-	$( "[id*='$']" ).each( function () {
-		var $this = $( this );
-
-		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
-	} );
-
-	$( ".tutorial-section pre, .readme-section pre" ).each( function () {
-		var $this = $( this );
-
-		var example = $this.find( "code" );
-		exampleText = example.html();
-		var lang = /{@lang (.*?)}/.exec( exampleText );
-		if ( lang && lang[1] ) {
-			exampleText = exampleText.replace( lang[0], "" );
-			example.html( exampleText );
-			lang = lang[1];
-		} else {
-			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
-			lang = langClassMatch ? langClassMatch[1] : "javascript";
-		}
-
-		if ( lang ) {
-
-			$this
-			.addClass( "sunlight-highlight-" + lang )
-			.addClass( "linenums" )
-			.html( example.html() );
-
-		}
-	} );
-
-	Sunlight.highlightAll( {
-		lineNumbers : true,
-		showMenu : true,
-		enableDoclinks : true
-	} );
-
-	$.catchAnchorLinks( {
-        navbarOffset: 10
-	} );
-	$( "#toc" ).toc( {
-		anchorName  : function ( i, heading, prefix ) {
-			var id = $( heading ).attr( "id" );
-			return id && id.replace(/\~/g, '-inner-').replace(/\./g, '-static-') || ( prefix + i );
-		},
-		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
-		showAndHide : false,
-		smoothScrolling: true
-	} );
-
-	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
-	$( '.dropdown-toggle' ).dropdown();
-
-    $( "table" ).each( function () {
-      var $this = $( this );
-      $this.addClass('table');
-    } );
-
-} );
-</script>
-
-
-
-<!--Navigation and Symbol Display-->
-
-
-<!--Google Analytics-->
-
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		SearcherDisplay.init();
-	});
-</script>
-
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
 </body>
 </html>
