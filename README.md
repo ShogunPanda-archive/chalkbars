@@ -1,9 +1,9 @@
 # chalkbars
 
-[![Gem Version](https://badge.fury.io/js/chalkbars.png)](http://badge.fury.io/js/chalkbars)
-[![Dependency Status](https://gemnasium.com/ShogunPanda/chalkbars.png?travis)](https://gemnasium.com/ShogunPanda/chalkbars)
-[![Build Status](https://secure.travis-ci.org/ShogunPanda/chalkbars.png?branch=master)](http://travis-ci.org/ShogunPanda/chalkbars)
-[![Coverage Status](https://coveralls.io/repos/github/ShogunPanda/chalkbars/badge.svg?branch=master)](https://coveralls.io/github/ShogunPanda/chalkbars?branch=master)
+[![Package Version](https://img.shields.io/npm/v/chalkbars.svg)](https://npmjs.com/package/chalkbars)
+[![Dependency Status](https://img.shields.io/gemnasium/ShogunPanda/chalkbars.svg)](https://gemnasium.com/ShogunPanda/chalkbars)
+[![Build Status](https://img.shields.io/travis/ShogunPanda/chalkbars.svg)](http://travis-ci.org/ShogunPanda/chalkbars)
+[![Coverage Status](https://img.shields.io/coveralls/github/ShogunPanda/chalkbars.svg)](https://coveralls.io/github/ShogunPanda/chalkbars)
 
 Template based terminal coloring based on [Chalk](https://www.npmjs.com/package/chalk) and [Handlebars](http://handlebarsjs.com).
 
@@ -156,4 +156,4 @@ The API documentation can be found [here](https://sw.cowtech.it/chalkbars/docs).
 
 Copyright (C) 2015 and above Shogun (shogun@cowtech.it).
 
-Licensed under the MIT license, which can be found at http://opensource.org/licenses/MIT.
+Licensed under the MIT license, which can be found at https://choosealicense.com/licenses/mit.
